@@ -29,7 +29,9 @@ jobs:
               echo "Traitement du dossier : $dir"
               cd "$dir" || exit 1
               ls -l
-              if compgen -G "*.md" > /dev/null; then
+              # Vérifie la présence de fichiers .md avec une boucle simple
+              md_files=$(ls *.md 2>/dev/null)
+              if [ -n "$md_files" ]; then
                 output_pdf="../${dir}.pdf"
                 pandoc --defaults ~/defaults.yaml --from markdown+emoji -o "$output_pdf" *.md
                 echo "PDF généré : $output_pdf"
