@@ -9,7 +9,7 @@ number-sections: true
 listings: true
 variables:
   titlepage: true
-  titlepage-logo: assets/Logo_BQIS.png
+  titlepage-logo: assets/logo_agiter.png
   mainfont: seguiemj
   fontsize: 12pt
   geometry: margin=2cm
