@@ -2,9 +2,9 @@ name: Build PDFs
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
@@ -26,13 +26,12 @@ jobs:
 
       - name: Generate PDFs
         run: |
-          # Liste des dossiers à traiter (Agiter_1, Agiter_2, etc.)
           for dir in Agiter_*; do
             if [ -d "$dir" ]; then
               echo "Traitement du dossier : $dir"
-              cd "$dir"
+              cd "$dir" || exit 1
               ls -l
-              if [ -f *.md ]; then
+              if compgen -G "*.md" > /dev/null; then
                 output_pdf="../${dir}.pdf"
                 pandoc --defaults ~/defaults.yaml --from markdown+emoji -o "$output_pdf" *.md
                 echo "PDF généré : $output_pdf"
@@ -48,5 +47,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: PDFs
-          path: |
-            Agiter_*.pdf
+          path: Agiter_*.pdf
