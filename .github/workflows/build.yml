@@ -1,0 +1,52 @@
+name: Build PDFs
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: pandoc/extra:3.1
+      entrypoint: ["/bin/sh", "-c"]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install fonts and prepare environment
+        run: |
+          mkdir -p ~/.fonts
+          cp .build/seguiemj.ttf ~/.fonts/
+          fc-cache -f
+          cp .build/pandoc-defaults.yaml ~/defaults.yaml
+
+      - name: Generate PDFs
+        run: |
+          # Liste des dossiers à traiter (Agiter_1, Agiter_2, etc.)
+          for dir in Agiter_*; do
+            if [ -d "$dir" ]; then
+              echo "Traitement du dossier : $dir"
+              cd "$dir"
+              ls -l
+              if [ -f *.md ]; then
+                output_pdf="../${dir}.pdf"
+                pandoc --defaults ~/defaults.yaml --from markdown+emoji -o "$output_pdf" *.md
+                echo "PDF généré : $output_pdf"
+              else
+                echo "Aucun fichier Markdown trouvé dans $dir"
+                exit 1
+              fi
+              cd ..
+            fi
+          done
+
+      - name: Upload PDFs as artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: PDFs
+          path: |
+            Agiter_*.pdf
