@@ -1,0 +1,29 @@
+---
+verbosity: INFO
+to: latex
+filters:
+  - pandoc-latex-environment
+template: eisvogel
+pdf-engine: lualatex
+number-sections: true
+listings: true
+variables:
+  titlepage: true
+  titlepage-logo: assets/Logo_BQIS.png
+  mainfont: seguiemj
+  fontsize: 12pt
+  geometry: margin=2cm
+  lang: fr
+  colorlinks: true
+  table-use-row-colors: true
+  toc: true
+  toc-own-page: true
+  header-includes: |
+    \newcounter{decnb}
+    \setcounter{decnb}{1}
+    \setcounter{secnumdepth}{0}
+    \usepackage{tcolorbox}
+    \newtcolorbox{decision-box}{colback=cyan!5!white,arc=0pt,outer arc=0pt,colframe=cyan!60!black,fonttitle=\bfseries,title=Décision \thedecnb \stepcounter{decnb}}
+    \newtcolorbox{info-box}{colback=green!20!white,arc=0pt,outer arc=0pt,colframe=green!60!black,fonttitle=\itshape,title=Information}
+    \newtcolorbox{warning-box}{colback=orange!5!white,arc=0pt,outer arc=0pt,colframe=orange!80!black}
+    \newtcolorbox{error-box}{colback=red!5!white,arc=0pt,outer arc=0pt,colframe=red!75!black}
