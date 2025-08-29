@@ -9,9 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: pandoc/extra:3.1
-      entrypoint: ["/bin/sh", "-c"]
+    container: pandoc/extra:3.1
 
     steps:
       - name: Checkout repository
