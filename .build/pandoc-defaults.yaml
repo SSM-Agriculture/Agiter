@@ -14,21 +14,21 @@ variables:
   table-use-row-colors: true
   toc: true
   toc-own-page: true
-header-includes: |
-  % Packages pour les boîtes colorées
-  \usepackage{tcolorbox}
-  \newcounter{decnb}
-  \setcounter{decnb}{1}
-  \setcounter{secnumdepth}{0}
-  \newtcolorbox{decision-box}{colback=cyan!5!white,arc=0pt,outer arc=0pt,colframe=cyan!60!black,fonttitle=\bfseries,title=Décision \thedecnb \stepcounter{decnb}}
-  \newtcolorbox{info-box}{colback=green!20!white,arc=0pt,outer arc=0pt,colframe=green!60!black,fonttitle=\itshape,title=Information}
-  \newtcolorbox{warning-box}{colback=orange!5!white,arc=0pt,outer arc=0pt,colframe=orange!80!black}
-  \newtcolorbox{error-box}{colback=red!5!white,arc=0pt,outer arc=0pt,colframe=red!75!black}
+  header-includes: |
+    % Packages pour les boîtes colorées
+    \usepackage{tcolorbox}
+    \newcounter{decnb}
+    \setcounter{decnb}{1}
+    \setcounter{secnumdepth}{0}
+    \newtcolorbox{decision-box}{colback=cyan!5!white,arc=0pt,outer arc=0pt,colframe=cyan!60!black,fonttitle=\bfseries,title=Décision \thedecnb \stepcounter{decnb}}
+    \newtcolorbox{info-box}{colback=green!20!white,arc=0pt,outer arc=0pt,colframe=green!60!black,fonttitle=\itshape,title=Information}
+    \newtcolorbox{warning-box}{colback=orange!5!white,arc=0pt,outer arc=0pt,colframe=orange!80!black}
+    \newtcolorbox{error-box}{colback=red!5!white,arc=0pt,outer arc=0pt,colframe=red!75!black}
 
-  % Ajouter un fond sur la page de titre
-  \usepackage{eso-pic}
-  \AddToShipoutPictureBG*{
-    \AtPageLowerLeft{
-      \includegraphics[width=\paperwidth,height=\paperheight]{assets/background-agiter.pdf}
+    % Fond sur la page de titre
+    \usepackage{eso-pic}
+    \AddToShipoutPictureBG*{
+      \AtPageLowerLeft{
+        \includegraphics[width=\paperwidth,height=\paperheight]{assets/fond_agiter.pdf}
+      }
     }
-  }
