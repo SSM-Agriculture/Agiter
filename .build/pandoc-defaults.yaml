@@ -9,7 +9,7 @@ number-sections: true
 listings: true
 variables:
   titlepage: true
-  page-background: assets/background-agiter.pdf
+  title-background: assets/background-agiter.pdf
   mainfont: seguiemj
   fontsize: 12pt
   geometry: margin=2cm
