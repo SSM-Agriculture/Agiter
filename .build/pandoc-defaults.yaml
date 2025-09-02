@@ -9,8 +9,7 @@ number-sections: true
 listings: true
 variables:
   titlepage: true
-  titlepage-logo: assets/logo_agiter.png
-  titlepage-logo-size: 0.9\textwidth
+  page-background: assets/background-agiter.pdf
   mainfont: seguiemj
   fontsize: 12pt
   geometry: margin=2cm
