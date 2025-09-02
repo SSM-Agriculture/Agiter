@@ -10,6 +10,7 @@ listings: true
 variables:
   titlepage: true
   titlepage-logo: assets/logo_agiter.png
+  titlepage-logo-width: 0.9\textwidth
   mainfont: seguiemj
   fontsize: 12pt
   geometry: margin=2cm
