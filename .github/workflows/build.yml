@@ -27,19 +27,20 @@ jobs:
           for dir in Agiter_*; do
             if [ -d "$dir" ]; then
               echo "Traitement du dossier : $dir"
-              cd "$dir" || exit 1
-              ls -l
-              # Vérifie la présence de fichiers .md avec une boucle simple
-              md_files=$(ls *.md 2>/dev/null)
+              ls -l "$dir"
+              # Vérifie la présence de fichiers .md
+              md_files=$(ls "$dir"/*.md 2>/dev/null || true)
               if [ -n "$md_files" ]; then
-                output_pdf="../${dir}.pdf"
-                pandoc --defaults ~/defaults.yaml --from markdown+emoji -o "$output_pdf" *.md
-                echo "PDF généré : $output_pdf"
+                output_pdf="${dir}.pdf"
+                pandoc --defaults ~/defaults.yaml \
+                       --from markdown+emoji \
+                       --template=templates/eisvogel.latex \
+                       -o "$output_pdf" $md_files
+                echo "✅ PDF généré : $output_pdf"
               else
-                echo "Aucun fichier Markdown trouvé dans $dir"
+                echo "⚠️ Aucun fichier Markdown trouvé dans $dir"
                 exit 1
               fi
-              cd ..
             fi
           done
 
