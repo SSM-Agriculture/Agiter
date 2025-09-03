@@ -11,11 +11,14 @@ Avec git-who, vous pouvez par exemple :
 
 ---
 
-## Comment ça marche ?
+## Installation
 
-L’installation est simple, puisqu’il s’agit d’un outil écrit en Go et distribué sous forme d’exécutable.  
-Une fois installé, il suffit d’appeler la commande :
+Voir avec Pierre pour une future installation sur Cerise (propre pour tous les utilisateurs) ?
 
-```bash
-git who chemin/vers/fichier
+TO DO
 
+## Exemples d’utilisation
+
+Avec le projet :
+
+![](assets/projet_exemple.png)
