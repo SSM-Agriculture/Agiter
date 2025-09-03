@@ -24,14 +24,14 @@ jobs:
 
       - name: Generate PDFs
         run: |
+          mkdir -p pdf
           for dir in Agiter_*; do
             if [ -d "$dir" ]; then
               echo "Traitement du dossier : $dir"
               ls -l "$dir"
-              # Vérifie la présence de fichiers .md
               md_files=$(ls "$dir"/*.md 2>/dev/null || true)
               if [ -n "$md_files" ]; then
-                output_pdf="${dir}.pdf"
+                output_pdf="pdf/${dir}.pdf"
                 pandoc --defaults ~/defaults.yaml \
                        --from markdown+emoji \
                        --template=templates/eisvogel.latex \
@@ -48,4 +48,12 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: PDFs
-          path: Agiter_*.pdf
+          path: pdf/*.pdf
+
+      - name: Commit and push PDFs to repository
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add pdf/*.pdf
+          git diff --cached --quiet || git commit -m "Add generated PDFs"
+          git push origin HEAD:main
