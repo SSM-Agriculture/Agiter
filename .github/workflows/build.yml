@@ -66,10 +66,11 @@ jobs:
           name: PDFs
           path: pdf
 
-      - name: Commit and push PDFs
+      - name: Commit and push PDF
+        shell: bash
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add pdf/*.pdf
-          git diff --cached --quiet || git commit -m "Add generated PDFs"
-          git push origin HEAD:main
+          git commit -m "MAJ de la version pdf"
+          git push origin main
