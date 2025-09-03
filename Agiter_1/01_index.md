@@ -22,3 +22,23 @@ TO DO
 Avec le projet :
 
 ![](assets/projet_exemple.png)
+
+Avec git-who on peut avoir une vue d'ensemble des contributeurs d'un dépôt :  
+
+![](assets/exemple_1.png)
+
+On peut aussi utiliser l'option -l pour lister les principaux contributeurs classés par nombre de lignes qu'ils ont ajoutées ou supprimées :  
+
+![](assets/exemple_2.png)
+
+On peut utiliser une autre commande hist pour avoir une idée de la façon dont le meilleur contributeur a changé au fil du temps :  
+
+![](assets/exemple_3.png)
+
+En utilisant le flag --since, on peut voir qui a contribué au projet depuis une certaine date (ici le 1er avril 2025) :  
+
+![](assets/exemple_4.png)
+
+Enfin, git-who permet également de voir qui a contribué pour la dernière fois à chacun des fichiers du projet :  
+
+![](assets/exemple_5.png)
