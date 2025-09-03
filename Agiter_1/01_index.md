@@ -9,8 +9,6 @@ Avec git-who, vous pouvez par exemple :
 - afficher un résumé des contributeurs sur un fichier,  
 - visualiser la répartition des contributions.
 
----
-
 ## Installation
 
 Voir avec Pierre pour une future installation sur Cerise (propre pour tous les utilisateurs) ?
