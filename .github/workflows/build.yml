@@ -53,8 +53,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: build_pdfs
     steps:
-      - name: Checkout repository
+      - name: Checkout repository (no persisted credentials)
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false   # ⬅️ empêche l'injection de l'auth du bot
+          fetch-depth: 0
 
       - name: Download PDFs artifact
         uses: actions/download-artifact@v4
@@ -62,13 +65,17 @@ jobs:
           name: PDFs
           path: pdf
 
-      - name: Commit and push PDFs
+      - name: Commit and push PDFs with PAT
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
-          # Vérifie si dernier commit est déjà celui du workflow
-          last_commit_message=$(git log -1 --pretty=%B)
+          # ⚠️ Purge l'extraheader éventuellement injecté par un autre checkout
+          git config --global --unset-all http.https://github.com/.extraheader || true
+
+          # Facultatif : éviter la boucle si le dernier commit vient déjà du workflow
+          last_commit_message=$(git log -1 --pretty=%B || echo "")
           if [[ "$last_commit_message" == "Add generated PDFs" ]]; then
             echo "✅ Les PDFs ont déjà été commités. Aucun push nécessaire."
             exit 0
@@ -77,7 +84,8 @@ jobs:
           git add pdf/*.pdf
           git diff --cached --quiet || git commit -m "Add generated PDFs"
 
-          # Réécrire l'URL du remote origin avec ton PAT
+          # 👇 Réécrit le remote pour forcer l'usage du PAT
           git remote set-url origin "https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }}"
 
+          # Push sur main (échouera si la règle de protection interdit le push direct)
           git push origin HEAD:main
