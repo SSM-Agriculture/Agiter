@@ -18,7 +18,7 @@ variables:
   colorlinks: true
   table-use-row-colors: true
   toc: true
-  toc-own-page: true
+  toc-own-page: false
   header-includes: |
     \newcounter{decnb}
     \setcounter{decnb}{1}
