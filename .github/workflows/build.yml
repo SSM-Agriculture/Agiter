@@ -7,10 +7,11 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  build_pdfs:
     runs-on: ubuntu-latest
     container: pandoc/extra:3.1
-
+    outputs:
+      pdf_dir: ${{ steps.set_pdf_dir.outputs.pdf_dir }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -23,6 +24,7 @@ jobs:
           cp .build/pandoc-defaults.yaml ~/defaults.yaml
 
       - name: Generate PDFs
+        id: set_pdf_dir
         run: |
           mkdir -p pdf
           for dir in Agiter_*; do
@@ -43,6 +45,7 @@ jobs:
               fi
             fi
           done
+          echo "pdf_dir=pdf" >> $GITHUB_OUTPUT
 
       - name: Upload PDFs as artifacts
         uses: actions/upload-artifact@v4
@@ -50,7 +53,20 @@ jobs:
           name: PDFs
           path: pdf/*.pdf
 
-      - name: Commit and push PDFs to repository
+  push_pdfs:
+    runs-on: ubuntu-latest
+    needs: build_pdfs
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download PDFs artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: PDFs
+          path: pdf
+
+      - name: Commit and push PDFs
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
