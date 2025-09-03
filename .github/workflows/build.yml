@@ -64,8 +64,20 @@ jobs:
 
       - name: Commit and push PDFs
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+          # Vérifie si dernier commit est déjà celui du workflow
+          last_commit_message=$(git log -1 --pretty=%B)
+          if [[ "$last_commit_message" == "Add generated PDFs" ]]; then
+            echo "✅ Les PDFs ont déjà été commités. Aucun push nécessaire."
+            exit 0
+          fi
+
           git add pdf/*.pdf
           git diff --cached --quiet || git commit -m "Add generated PDFs"
-          git push "https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }}" HEAD:main
+
+          # Réécrire l'URL du remote origin avec ton PAT
+          git remote set-url origin "https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }}"
+
+          git push origin HEAD:main
