@@ -25,7 +25,7 @@ git blame execute_prog_principal_job.R
 
 - Ou avec l'IHM de GitHub en clquant sur le bouton "Blame".
   
-![](./assets/blame_gitlab.png)
+![](Agiter_1/assets/blame_gitlab.png)
 
 C’est précisément pour répondre à ce besoin qu’a été créé **git-who**.
 
