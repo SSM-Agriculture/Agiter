@@ -23,7 +23,7 @@ Avec git blame on peut savoir qui a modifié **chaque ligne de code** mais cela 
 git blame execute_prog_principal_job.R
 ```
 
-- Ou avec l'IHM de GitHub en clquant sur le bouton "Blame".
+- Ou avec l'IHM de GitHub en cliquant sur le bouton "Blame".
   
 ![](Agiter_1/assets/blame_gitlab.png)
 
