@@ -5,6 +5,8 @@ author: Damien Dotta
 date: "02/09/2025"
 ...
 
+---
+
 # Découvrir *git-who* : un outil simple pour savoir *qui* a écrit *quoi* dans votre code
 
 Dans la vie d’un projet logiciel collaboratif, une question revient très souvent :  
